@@ -9,10 +9,7 @@ const Cars = () => {
             <NavigationBar />
             <SideBar />
             <Hero />
-            <FilterCar />            
-
-            {/* Cars Result */}
-            <Container className="d-flex flex-row justify-content-center flex-wrap mt-5" id="cars-container"></Container>
+            <FilterCar />
 
             <Footer />
         </Container>
