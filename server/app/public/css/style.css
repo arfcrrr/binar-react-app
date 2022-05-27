@@ -1,0 +1,283 @@
+/* import Rubik fonts */
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap');
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.bg-lightblue,
+.accordion-button:hover {
+    background-color: #F1F3FF;
+}
+
+.bg-lime {
+    background-color: #5CB85F;
+    color: #fff;
+}
+
+.bg-lime:hover {
+    background-color: #54aa56;
+    color: #fff;
+}
+
+.navbar {
+    padding: 24px 136px;
+}
+
+.navbar-brand {
+    background-color: #0D28A6;
+    width: 100px;
+    height: 34px;
+}
+
+.nav-item>a:after {
+    color: #000;
+    font-weight: bold;
+}
+
+section {
+    margin-bottom: 3rem;
+}
+
+#services {
+    padding: 48px 0;
+}
+
+.row,
+.col {
+    padding: 0;
+}
+
+h1,
+p {
+    padding: 0;
+}
+
+.title {
+    font-weight: bold;
+    padding: 0;
+}
+
+.menu {
+    font-weight: 600;
+}
+
+.right-image {
+    float: right;
+}
+
+.btn-auto {
+    width: auto;
+}
+
+#services-image {
+    padding-right: 64px;
+}
+
+#why-us>.container>.container-card>.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.card {
+    width: 100%;
+}
+
+.card-testimonial {
+    width: 640px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    padding: 24px 80px 32px 80px;
+}
+
+.jumbotron {
+    background-color: #0D28A6;
+    border-radius: 12px;
+    padding: 5% 15%;
+    width: 85%;
+}
+
+.jumbotron>p {
+    width: 65%;
+}
+
+#faq>.container {
+    width: 80%;
+}
+
+footer {
+    margin: 150px auto 100px auto;
+}
+
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    background-color: #fff;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    color: #000;
+    display: block;
+    transition: 0.3s;
+    padding-top: 12px;
+}
+
+.sidebar a:hover {
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+}
+
+#overlay {
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+    cursor: pointer;
+}
+
+.container-filter {
+    z-index: 2;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    padding: 24px;
+    font-family: 'Rubik';
+}
+
+.filter > label {
+    margin-bottom: 8px;
+}
+.filter {
+    padding: 16px;
+}
+
+.form-select > option:hover {
+    background-color: #C9E7CA;
+}
+
+/* on smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidebar {
+        padding-top: 16px;
+    }
+
+    .sidebar a {
+        font-size: 18px;
+    }
+}
+
+/* responsive layout */
+@media screen and (max-width: 360px) {
+
+    .navbar,
+    .section {
+        width: 100%;
+        padding-top: 10%;
+    }
+
+    .navbar {
+        padding-bottom: 16%;
+    }
+
+    .navbar-brand {
+        left: 10%;
+        margin-top: 8px;
+        position: absolute;
+    }
+
+    .navbar-toggler {
+        right: 8%;
+        margin-top: 8px;
+        position: absolute;
+    }
+
+    .title,
+    .subtitle {
+        text-align: center;
+    }
+
+    .title-long {
+        text-align: left;
+    }
+
+    .container>.row,
+    #why-us>.container>.container-card>.row {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .container-card>.row {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card {
+        margin: 8px 0;
+    }
+
+    .card-testimonial {
+        margin: 12px 32px;
+        width: 85%;
+        padding: 20px;
+    }
+
+    .card-testimonial>.card-body>.row {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .content-testimonial {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 12px 0;
+    }
+
+    .jumbotron {
+        background-color: #0D28A6;
+        border-radius: 12px;
+        padding: 5% 10%;
+        width: 90%;
+    }
+
+    footer>.container-fluid>.row {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    footer>.container-fluid>.row>.col-auto {
+        width: 100%;
+        margin: 0 16px;
+        padding: 12px 32px;
+    }
+}

@@ -1,0 +1,426 @@
+openapi: 3.0.0
+
+info:
+  version: 0.0.1
+  title: Binar Car Management API
+  description: An Open API for Binar Car Rental Management
+
+servers:
+  - url: http://localhost:8000
+
+paths:
+  /api/v1/register:
+    post:
+      description: Register New User to Binar Car Management
+      tags:
+        - Authentication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: 
+                email:
+                  type: string
+                  example: user@mail.com
+                password:
+                  type: string
+                  example: password
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: CREATED
+                  user:
+                    $ref: "#/components/schemas/User"
+                        
+        400:
+          $ref: "#/components/responses/BadRequest"
+  /api/v1/login:
+    post:
+      description: User Login to Binar Car 
+      tags:
+        - Authentication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: 
+                email:
+                  type: string
+                  example: user@mail.com
+                password:
+                  type: string
+                  example: password
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: OK
+                  user:
+                    type: object
+                    properties:
+                      id: 
+                        type: integer
+                        example: 11
+                      email:
+                        type: string
+                        example: user@mail.com
+                      role:
+                        type: string
+                        example: member
+                      token:
+                        type: string
+                        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJpbmR1QGdtYWlsLmNvbSIsInBhc3N3b3JkIjoicmluZHUxMjMiLCJpYXQiOjE2NTI0NTE2MTl9.rpbZAPxncORJenmBbRVy51zF3PVlkf-zCShyPH58KGU  
+        400:
+          $ref: "#/components/responses/BadRequest"
+
+  /api/v1/whoami:
+    get:
+      description: Shows Current Logged In User's Information
+      tags:
+        - Authentication
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        400:
+          $ref: "#/components/responses/BadRequest"
+      security:
+      - bearerAuth: []
+      
+  /api/v1/add-admin/{id}:
+    post:
+      description: Add admin by user's ID
+      tags:
+        - User Configuration
+      parameters: 
+      - in: path
+        name: id
+        description: ID of the user
+        required: true
+        schema:
+          type: integer
+          example: 3
+      responses:
+        200:
+            description: OK
+            content:
+              application/json:
+                schema: 
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                      example: OK
+                    user:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 2
+                        email:
+                          type: string
+                          example: user@mail.com
+                        role:
+                          type: string
+                          example: admin
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+      security:
+        - bearerAuth: []
+          
+  /api/v1/dashboard-car:
+    get:
+      description: Shows list of available cars in database
+      tags:
+        - CRUD (Create, Read, Update, Delete)
+      responses:
+        200:
+            description: OK
+            content:
+              application/json:
+                schema: 
+                  type: object
+                  properties:
+                    cars:
+                      $ref: "#/components/schemas/Car"
+                        
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+      security:
+        - bearerAuth: []
+        
+  /api/v1/dashboard-car/{id}:
+    get:
+      description: Shows list of available cars in database
+      tags:
+        - CRUD (Create, Read, Update, Delete)
+      parameters: 
+      - in: path
+        name: id
+        description: ID of the product
+        required: true
+        schema:
+          type: integer
+          example: 7
+      responses:
+        200:
+            description: OK
+            content:
+              application/json:
+                schema: 
+                  $ref: "#/components/schemas/Car"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+      security:
+        - bearerAuth: []
+        
+  /api/v1/create-car:
+    post:
+      description: Create new car data
+      tags:
+        - CRUD (Create, Read, Update, Delete)
+      requestBody:
+        description: Input new car data
+        required: true
+        content:
+          application/json:
+            schema: 
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: All New Avanza
+                rent_per_day:
+                  type: integer
+                  example: 550000
+                size:
+                  type: string
+                  example: Medium
+                image:
+                  type: string
+                  example: https://www.toyota.astra.co.id/sites/default/files/2021-11/3-avanza-black-metallic.png
+      responses:
+        201:
+            description: Created
+            content:
+              application/json:
+                schema: 
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                      example: CREATED
+                    car:
+                      $ref: "#/components/schemas/Car"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+      security:
+        - bearerAuth: []
+                          
+  /api/v1/update-car/{id}:
+    post:
+      description: Update car's data
+      tags:
+        - CRUD (Create, Read, Update, Delete)
+      parameters: 
+        - in: path
+          name: id
+          description: ID of the product
+          required: true
+          schema:
+            type: integer
+            example: 7
+      requestBody:
+        description: Input updated car's data
+        required: true
+        content:
+          application/json:
+            schema: 
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: All New Avanza
+                rent_per_day:
+                  type: integer
+                  example: 550000
+                size:
+                  type: string
+                  example: Medium
+                image:
+                  type: string
+                  example: https://www.toyota.astra.co.id/sites/default/files/2021-11/3-avanza-black-metallic.png
+      responses:
+        200:
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                      example: OK
+                    car:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: All New Avanza
+                        rent_per_day:
+                          type: integer
+                          example: 550000
+                        size:
+                          type: string
+                          example: Medium
+                        image:
+                          type: string
+                          example: https://www.toyota.astra.co.id/sites/default/files/2021-11/3-avanza-black-metallic.png
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+      security:
+        - bearerAuth: []          
+                      
+  /api/v1/delete-car/{id}:
+    get:
+      description: Delete car's data
+      tags:
+        - CRUD (Create, Read, Update, Delete)
+      parameters: 
+        - in: path
+          name: id
+          description: ID of the product
+          required: true
+          schema:
+            type: integer
+            example: 7
+      responses:
+        200:
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                      example: OK
+                    message:
+                      type: string
+                      example: Car successfully deleted
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+      security:
+        - bearerAuth: []
+                
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      
+  schemas:
+    User:
+      type: object
+      properties:
+        id: 
+          type: integer
+          example: 11
+        email:
+          type: string
+          example: user@mail.com
+        password:
+          type: string
+          example: $2b$10$oQpY2NcxZn3wvc6rBsaetez/a9chFreN0yPr3fFcP4mmEMOtHlYje
+        updated_at:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        role:
+          type: string
+          example: member
+    Car:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 7
+        name:
+          type: string
+          example: All New Avanza
+        rent_per_day:
+          type: integer
+          example: 550000
+        size:
+          type: string
+          example: Medium
+        image:
+          type: string
+          example: https://www.toyota.astra.co.id/sites/default/files/2021-11/3-avanza-black-metallic.png
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+          
+  responses:
+    BadRequest:
+      description: BAD REQUEST
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                example: FAIL
+              message:
+                type: string
+                example: This page is not working. Please try again later.
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                example: FAIL
+              message:
+                type: string
+                example: Invalid signature.
