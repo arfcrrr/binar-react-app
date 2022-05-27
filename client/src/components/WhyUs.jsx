@@ -10,8 +10,8 @@ const WhyUs = () => {
     return (
         <section id="why-us">
             <Container>
-                <h2 class="title">Why Us?</h2>
-                <p class="subtitle my-4">Mengapa harus pilih Binar Car Rental?</p>
+                <h2 className="title">Why Us?</h2>
+                <p className="subtitle my-4">Mengapa harus pilih Binar Car Rental?</p>
                 <Container className="container-card">
                     <Row>
                         <Col>

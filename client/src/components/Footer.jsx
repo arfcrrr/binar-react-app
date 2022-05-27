@@ -18,10 +18,10 @@ const Footer = () => {
                         <p>081-233-334-808</p>
                     </Col>
                     <Col md="auto" className="mx-5 mb-3">
-                        <p class="menu">Our Services</p>
-                        <p class="menu">Why Us</p>
-                        <p class="menu">Testimonial</p>
-                        <p class="menu">FAQ</p>
+                        <p className="menu">Our Services</p>
+                        <p className="menu">Why Us</p>
+                        <p className="menu">Testimonial</p>
+                        <p className="menu">FAQ</p>
                     </Col>
                     <Col md="auto" className="mx-5 mb-3">
                         <Row>
@@ -37,7 +37,7 @@ const Footer = () => {
                     </Col>
                     <Col md="auto" className="mx-5 mb-3">
                         <p>Copyright Binar 2022</p>
-                        <div class="navbar-brand"></div>
+                        <div className="navbar-brand"></div>
                     </Col>
                 </Row>
             </Container>

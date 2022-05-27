@@ -7,6 +7,7 @@ import Testimonial from './Testimonial';
 import Jumbotron from './Jumbotron';
 import Faq from './Faq';
 import FilterCar from './FilterCar';
+import CardCar from './CardCar';
 import Footer from './Footer';
 
-export { NavigationBar, SideBar, Hero, Services, WhyUs, Testimonial, Jumbotron, Faq, FilterCar, Footer };
+export { NavigationBar, SideBar, Hero, Services, WhyUs, Testimonial, Jumbotron, Faq, FilterCar, CardCar, Footer };
