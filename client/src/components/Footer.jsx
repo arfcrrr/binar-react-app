@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { Container, Row, Col } from 'react-bootstrap';
 import { ReactComponent as IconFacebook } from '../assets/images/icon_facebook.svg';
 import { ReactComponent as IconInstagram } from '../assets/images/icon_instagram.svg';
