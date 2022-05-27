@@ -1,0 +1,83 @@
+<% cars.forEach(function(car) { %>
+    <div class="card m-2" style="width: 330px;">
+        <img src="<%- car.image %>" class="card-img-top p-4" alt="Car Image">
+        <div class="card-body d-flex flex-column p-4">
+            <p class="card-text">
+                <%- car.name %>
+            </p>
+            <h5 class="card-title fw-bold">
+                Rp <%- car.rent_per_day.toLocaleString() %> / hari
+            </h5>
+            <div class="text-icon pb-2 d-flex flex-row">
+                <img src="images/icon_clock.svg" alt="Icon Clock">
+                <p class="ms-2 my-0" id="updated_at">
+                    <% let dateString=car.updated_at.getDate() + " " + car.updated_at.toLocaleString('default', {
+                        month: 'long' }) + " " + car.updated_at.getFullYear() + ", " + ("0" +
+                        car.updated_at.getHours()).slice(-2) + ":" + ("0" + car.updated_at.getMinutes()).slice(-2) %>
+                        Updated at
+                        <%- dateString %>
+                </p>
+            </div>
+            <div class="row mt-3">
+                <div class="col-auto">
+                    <a href="#" onclick="document.getElementById('deleteModal').style.display='block'"
+                        class="btn btn-outline-red btn-edit float-end d-flex flex-row justify-content-center align-items-center fw-bold"><img
+                            src="/images/icon_trash.svg" class="me-4" alt="Icon Edit">Delete</a>
+                </div>
+                <div class="col-auto">
+                    <a href="/cars/edit/<%= car.id %>"
+                        class="btn btn-green float-end d-flex flex-row justify-content-center align-items-center fw-bold"><img
+                            src="/images/icon_edit.svg" class="me-4" alt="Icon Edit">Edit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div id="deleteModal" class="modal">
+        <form class="modal-content">
+            <div class="container modal-body p-5 d-flex flex-column justify-content-center align-items-center">
+                <img src="/images/illustration_cars.png" alt="Car Illustration">
+                <h2 class="fw-bold text-center m-4">Menghapus Data Mobil</h2>
+                <p class="text-center">Setelah dihapus, data mobil tidak dapat dikembalikan. Yakin ingin menghapus?</p>
+                <div class="row clearfix d-flex flex-row justify-content-center mt-3">
+                    <div class="col-auto">
+                        <button type="button" onclick="document.getElementById('deleteModal').style.display='none'"
+                            class="confirmBtn btn btn-outline-blue">Tidak</button>
+                    </div>
+                    <div class="col-auto">
+                        <a href="/cars/delete/<%= car.id %>"
+                            class="confirmBtn btn btn-blue d-flex align-items-center justify-content-center" id="deleteBtn">Ya</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div id="alertDelete"></div>
+    </div>
+    <% }); %>
+
+        <script>
+            let modal = document.getElementById("deleteModal");
+
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+
+            // Alert Script
+            let alertDelete = document.getElementById('alertDelete');
+            let alertTrigger = document.getElementById('deleteBtn');
+
+            function alert(message, type) {
+                let wrapper = document.createElement('div')
+                wrapper.innerHTML = `<div class="alert alert-${type} alert-dismissible" role="alert"> ${message} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`
+
+                alertDelete.append(wrapper);
+            }
+
+            if (alertTrigger) {
+                alertTrigger.addEventListener('click', function () {
+                    alert('Data Berhasil Dihapus', 'dark');
+                })
+            }
+        </script>
