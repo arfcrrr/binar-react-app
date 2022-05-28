@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
+import ImgCar from "../assets/images/img_car.png";
 
 const Hero = () => {
     return (
@@ -11,7 +12,7 @@ const Hero = () => {
                     <a href="cars" className="btn btn-auto bg-lime my-2 mb-4">Mulai Sewa Mobil</a>
                 </Col>
                 <Col md>
-                    <img src={require("../assets/images/img_car.png")} className="right-image img-fluid" alt="Binar Car"></img>
+                    <img src={ImgCar} className="right-image img-fluid" alt="Binar Car"></img>
                 </Col>
             </Row>
         </section >

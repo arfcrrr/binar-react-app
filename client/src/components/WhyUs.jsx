@@ -1,10 +1,10 @@
 import React from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 
-import { ReactComponent as IconComplete } from '../assets/images/icon_complete.svg';
-import { ReactComponent as IconPrice } from '../assets/images/icon_price.svg';
-import { ReactComponent as IconHours } from '../assets/images/icon_24hrs.svg';
-import { ReactComponent as IconProfessional } from '../assets/images/icon_professional.svg';
+import IconComplete from '../assets/images/icon_complete.svg';
+import IconPrice from '../assets/images/icon_price.svg';
+import IconHours from '../assets/images/icon_24hrs.svg';
+import IconProfessional from '../assets/images/icon_professional.svg';
 
 const WhyUs = () => {
     return (
@@ -18,7 +18,7 @@ const WhyUs = () => {
                             <Container className="container-card">
                                 <Card>
                                     <Card.Body>
-                                        <IconComplete />
+                                        <img src={IconComplete} />
                                         <Card.Title className="title text-start my-3">Mobil Lengkap</Card.Title>
                                         <Card.Text>
                                             Tersedia banyak pilihan mobil, kondisi masih baru, bersih dan terawat
@@ -31,7 +31,7 @@ const WhyUs = () => {
                             <Container className="container-card">
                                 <Card>
                                     <Card.Body>
-                                        <IconPrice />
+                                        <img src={IconPrice} />
                                         <Card.Title className="title text-start my-3">Harga Murah</Card.Title>
                                         <Card.Text>
                                             Harga murah dan bersaing, bisa bandingkan harga kami dengan rental mobil lain
@@ -44,7 +44,7 @@ const WhyUs = () => {
                             <Container className="container-card">
                                 <Card>
                                     <Card.Body>
-                                        <IconHours />
+                                        <img src={IconHours} />
                                         <Card.Title className="title text-start my-3">Layanan 24 Jam</Card.Title>
                                         <Card.Text>
                                             Sopir yang profesional, berpengalaman, jujur, ramah dan selalu tepat waktu
@@ -57,7 +57,7 @@ const WhyUs = () => {
                             <Container className="container-card">
                                 <Card>
                                     <Card.Body>
-                                        <IconProfessional />
+                                        <img src={IconProfessional} />
                                         <Card.Title className="title text-start my-3">Sopir Profesional</Card.Title>
                                         <Card.Text>
                                             Tersedia banyak pilihan mobil, kondisi masih baru, bersih dan terawat
