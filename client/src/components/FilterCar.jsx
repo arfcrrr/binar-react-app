@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 
 import CardCar from './CardCar';
@@ -6,50 +6,56 @@ import axios from 'axios';
 
 const FilterCar = () => {
     const [dataCars, setDataCars] = useState([]);
-    const [formFilter, setFormFilter] = useState([]);
+    const [dataFilter, setDataFilter] = useState([]);
+    const [formFilter, setFormFilter] = useState({});
 
     const handleChange = (e) => {
-        let data = { ...formFilter };
+        const data = { ...formFilter };
         data[e.target.name] = e.target.value;
+
         setFormFilter(data);
     }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        let data = [...dataCars]
+        handleFilterData();
+        const data = []
 
         dataCars.forEach(car => {
-            if (car.availableAt >= formFilter.availableAt && car.availableAt.getHour() == formFilter.availableAt && car.capacity == formFilter.capacity) {
+            if (car.capacity == Number(formFilter.capacity)) {
                 data.push({
-                    image: dataCars.image,
-                    model: dataCars.model,
-                    type: dataCars.type,
-                    rentPerDay: dataCars.rentPerDay,
-                    capacity: dataCars.capacity,
-                    transmission: dataCars.transmission,
-                    year: dataCars.year,
+                    id: car.id,
+                    image: car.image,
+                    model: car.model,
+                    type: car.type,
+                    rentPerDay: car.rentPerDay,
+                    capacity: car.capacity,
+                    transmission: car.transmission,
+                    year: car.year,
                 })
+                setDataFilter(data)
             }
         })
+        console.log('DATA CARS: ', dataCars);
+        console.log('FORM FILTER: ', formFilter);
+        console.log('DATA FILTER: ', dataFilter);
     }
 
-    useEffect(() => {
-        axios.get('https://raw.githubusercontent.com/fnurhidayat/probable-garbanzo/main/data/cars.min.json')
-            .then(res => {
-                console.log(res)
-                setDataCars(res.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    })
-
+    const handleFilterData = async () => {
+        try {
+            const data = await axios.get('https://raw.githubusercontent.com/fnurhidayat/probable-garbanzo/main/data/cars.min.json')
+            setDataCars(data.data)
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
     return (
         <Container fluid>
             <Container className="container-filter">
                 <Form onSubmit={handleSubmit} className="mx-5">
                     <Row className="d-flex flex-row justify-content-center">
-                        <Col className="filter">
+                        <Col md="auto" className="filter mx-2">
                             <Form.Label>Tipe Driver</Form.Label>
                             <Form.Select aria-label="Default select example">
                                 <option selected>Pilih Tipe Driver</option>
@@ -57,7 +63,7 @@ const FilterCar = () => {
                                 <option value="nodriver">Tanpa Sopir (Lepas Kunci)</option>
                             </Form.Select>
                         </Col>
-                        <Col className="filter">
+                        <Col md="auto" className="filter mx-2">
                             <Form.Label>Tanggal</Form.Label>
                             <Form.Control
                                 type="date"
@@ -65,9 +71,9 @@ const FilterCar = () => {
                                 onChange={handleChange}
                                 value={formFilter.availableAt} />
                         </Col>
-                        <Col className="filter">
+                        <Col md="auto" className="filter mx-2">
                             <Form.Label>Waktu Jemput / Ambil</Form.Label>
-                            <Form.Select aria-label="Default select example">
+                            <Form.Select name="availableTime" value={formFilter.availableTime} onChange={handleChange} aria-label="Default select example">
                                 <option selected>Pilih Waktu</option>
                                 <option value="8">08.00</option>
                                 <option value="9">09.00</option>
@@ -76,9 +82,9 @@ const FilterCar = () => {
                                 <option value="12">12.00</option>
                             </Form.Select>
                         </Col>
-                        <Col className="filter">
+                        <Col md="auto" className="filter mx-2">
                             <Form.Label>Jumlah Penumpang (Optional)</Form.Label>
-                            <Form.Select aria-label="Default select example">
+                            <Form.Select name="capacity" value={formFilter.capacity} onChange={handleChange} aria-label="Default select example">
                                 <option selected>Jumlah Penumpang</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -98,20 +104,19 @@ const FilterCar = () => {
             {/* Cars Result */}
             <Container className="d-flex flex-row justify-content-center flex-wrap mt-5" id="cars-container">
                 {
-                    dataCars.map(dataCar => {
-                        console.log('INI DATACARS: ', dataCars);
-                        return (
-                            <CardCar
-                                image={dataCar.image}
-                                model={dataCar.model}
-                                type={dataCar.type}
-                                rentPerDay={dataCar.rentPerDay}
-                                capacity={dataCar.capacity}
-                                transmission={dataCar.transmission}
-                                year={dataCar.year}
-                            />
-                        )
-                    })
+                    dataFilter?.map(dataCar => (
+                        <CardCar
+                            key={dataCar.id}
+                            image={dataCar.image}
+                            model={dataCar.model}
+                            type={dataCar.type}
+                            rentPerDay={dataCar.rentPerDay}
+                            capacity={dataCar.capacity}
+                            transmission={dataCar.transmission}
+                            year={dataCar.year}
+                        />
+                    )
+                    )
                 }
             </Container>
         </Container>

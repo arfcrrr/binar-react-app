@@ -1,11 +1,11 @@
 import React from 'react';
 
 import { Container, Row, Col } from 'react-bootstrap';
-import { ReactComponent as IconFacebook } from '../assets/images/icon_facebook.svg';
-import { ReactComponent as IconInstagram } from '../assets/images/icon_instagram.svg';
-import { ReactComponent as IconTwitter } from '../assets/images/icon_twitter.svg';
-import { ReactComponent as IconMail } from '../assets/images/icon_mail.svg';
-import { ReactComponent as IconTwitch } from '../assets/images/icon_twitch.svg';
+import IconFacebook from '../assets/images/icon_facebook.svg';
+import IconInstagram from '../assets/images/icon_instagram.svg';
+import IconTwitter from '../assets/images/icon_twitter.svg';
+import IconMail from '../assets/images/icon_mail.svg';
+import IconTwitch from '../assets/images/icon_twitch.svg';
 
 const Footer = () => {
     return (
@@ -28,11 +28,11 @@ const Footer = () => {
                             <Col><p>Connect with us</p></Col>
                         </Row>
                         <Row className="d-flex flex-row justify-content-start">
-                            <Col className="icon-footer me-3"><IconFacebook /></Col>
-                            <Col className="icon-footer me-3"><IconInstagram /></Col>
-                            <Col className="icon-footer me-3"><IconTwitter /></Col>
-                            <Col className="icon-footer me-3"><IconMail /></Col>
-                            <Col className="icon-footer me-3"><IconTwitch /></Col>
+                            <Col className="icon-footer me-3"><img src={IconFacebook} /></Col>
+                            <Col className="icon-footer me-3"><img src={IconInstagram} /></Col>
+                            <Col className="icon-footer me-3"><img src={IconTwitter} /></Col>
+                            <Col className="icon-footer me-3"><img src={IconMail} /></Col>
+                            <Col className="icon-footer me-3"><img src={IconTwitch} /></Col>
                         </Row>
                     </Col>
                     <Col md="auto" className="mx-5 mb-3">
