@@ -19,10 +19,13 @@ const FilterCar = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         handleFilterData();
-        const data = []
+        const data = [];
+        
+        const dateFormat = new Date(formFilter.availableAt);
+        dateFormat.setHours(formFilter.availableTime);
 
         dataCars.forEach(car => {
-            if (car.capacity == Number(formFilter.capacity)) {
+            if (new Date(car.availableAt).getTime() >= dateFormat.getTime() && car.capacity === Number(formFilter.capacity)) {
                 data.push({
                     id: car.id,
                     image: car.image,
@@ -104,16 +107,16 @@ const FilterCar = () => {
             {/* Cars Result */}
             <Container className="d-flex flex-row justify-content-center flex-wrap mt-5" id="cars-container">
                 {
-                    dataFilter?.map(dataCar => (
+                    dataFilter?.map(filterCar => (
                         <CardCar
-                            key={dataCar.id}
-                            image={dataCar.image}
-                            model={dataCar.model}
-                            type={dataCar.type}
-                            rentPerDay={dataCar.rentPerDay}
-                            capacity={dataCar.capacity}
-                            transmission={dataCar.transmission}
-                            year={dataCar.year}
+                            key={filterCar.id}
+                            image={filterCar.image}
+                            model={filterCar.model}
+                            type={filterCar.type}
+                            rentPerDay={filterCar.rentPerDay}
+                            capacity={filterCar.capacity}
+                            transmission={filterCar.transmission}
+                            year={filterCar.year}
                         />
                     )
                     )
