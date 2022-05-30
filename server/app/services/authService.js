@@ -14,7 +14,7 @@ module.exports = {
     },
 
     async createToken(data) {
-        return jwt.sign(data, `${process.env.JWT_SECRET}` || "Secret");
+        return jwt.sign(data, process.env.JWT_SECRET || "Secret");
     },
 
 
